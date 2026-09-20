@@ -55,9 +55,7 @@ const ThemeChanger = ({
           <span className="text-base-content/50 capitalize text-sm">
             {loading
               ? skeleton({ widthCls: 'w-16', heightCls: 'h-5' })
-              : theme === themeConfig.defaultTheme
-                ? 'Default'
-                : theme}
+              : theme}
           </span>
         </div>
         <div className="flex-0">
