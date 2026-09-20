@@ -1,8 +1,7 @@
-import { RiDice4Line } from 'react-icons/ri';
+import { MdDarkMode, MdLightMode } from 'react-icons/md';
 import { SanitizedThemeConfig } from '../../interfaces/sanitized-config';
 import { LOCAL_STORAGE_KEY_NAME } from '../../constants';
 import { skeleton } from '../../utils';
-import { MouseEvent } from 'react';
 
 /**
  * Renders a theme changer component.
@@ -25,11 +24,9 @@ const ThemeChanger = ({
   loading: boolean;
   themeConfig: SanitizedThemeConfig;
 }) => {
-  const changeTheme = (
-    e: MouseEvent<HTMLAnchorElement>,
-    selectedTheme: string,
-  ) => {
-    e.preventDefault();
+  const changeTheme = () => {
+    const selectedTheme =
+      theme === 'dark' ? themeConfig.defaultTheme : 'dark';
 
     document.querySelector('html')?.setAttribute('data-theme', selectedTheme);
 
@@ -71,39 +68,23 @@ const ThemeChanger = ({
               className: 'mr-6',
             })
           ) : (
-            <div title="Change Theme" className="dropdown dropdown-end">
-              <div
-                tabIndex={0}
-                className="btn btn-ghost m-1 normal-case opacity-50 text-base-content flex items-center whitespace-nowrap"
-              >
-                <RiDice4Line className="inline-block w-5 h-5 stroke-current" />
-              </div>
-              <div
-                tabIndex={0}
-                className="mt-16 overflow-y-auto shadow-2xl top-px dropdown-content max-h-96 min-w-max rounded-lg bg-base-200 text-base-content z-10"
-              >
-                <ul className="p-4 menu menu-sm">
-                  {[
-                    themeConfig.defaultTheme,
-                    ...themeConfig.themes.filter(
-                      (item) => item !== themeConfig.defaultTheme,
-                    ),
-                  ].map((item, index) => (
-                    <li key={index}>
-                      {}
-                      <a
-                        onClick={(e) => changeTheme(e, item)}
-                        className={`${theme === item ? 'active' : ''}`}
-                      >
-                        <span className="opacity-60 capitalize">
-                          {item === themeConfig.defaultTheme ? 'Default' : item}
-                        </span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            <button
+              type="button"
+              title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+              aria-label={
+                theme === 'dark'
+                  ? 'Switch to light theme'
+                  : 'Switch to dark theme'
+              }
+              onClick={changeTheme}
+              className="btn btn-ghost btn-circle text-base-content opacity-70"
+            >
+              {theme === 'dark' ? (
+                <MdLightMode className="h-5 w-5" />
+              ) : (
+                <MdDarkMode className="h-5 w-5" />
+              )}
+            </button>
           )}
         </div>
       </div>

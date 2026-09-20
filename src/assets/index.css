@@ -1,29 +1,24 @@
 @import 'tailwindcss';
 @plugin "daisyui" {
   themes:
-    'light', 'dark', 'cupcake', 'bumblebee', 'emerald', 'corporate',
-    'synthwave', 'retro', 'cyberpunk', 'valentine', 'halloween', 'garden',
-    'forest', 'aqua', 'lofi', 'pastel', 'fantasy', 'wireframe', 'black',
-    'luxury', 'dracula', 'cmyk', 'autumn', 'business', 'acid', 'lemonade',
-    'night', 'coffee', 'winter', 'dim', 'nord', 'sunset', 'caramellatte',
-    'abyss', 'silk', 'procyon';
+    'light-blue', 'dark';
 }
 
 @plugin "daisyui/theme" {
-  name: 'procyon';
+  name: 'light-blue';
   color-scheme: light;
 
-  --color-base-100: #e3e3ed;
-  --color-base-200: #d1d1db;
-  --color-base-300: #bfbfc9;
-  --color-base-content: #2a2730;
-  --color-primary: #fc055b;
+  --color-base-100: #f5faff;
+  --color-base-200: #e7f2fb;
+  --color-base-300: #c8deee;
+  --color-base-content: #19324a;
+  --color-primary: #2f80b7;
   --color-primary-content: #ffffff;
-  --color-secondary: #219aaf;
+  --color-secondary: #6aaacb;
   --color-secondary-content: #ffffff;
-  --color-accent: #e8d03a;
-  --color-accent-content: #2a2730;
-  --color-neutral: #2a2730;
+  --color-accent: #e5b84b;
+  --color-accent-content: #19324a;
+  --color-neutral: #19324a;
   --color-neutral-content: #ffffff;
   --color-info: #219aaf;
   --color-info-content: #ffffff;
