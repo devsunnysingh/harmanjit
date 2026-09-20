@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import LazyImage from '../lazy-image';
 import { MdOpenInNew } from 'react-icons/md';
 import { ga, skeleton } from '../../utils';
@@ -187,6 +187,17 @@ const ExternalProjectCard = ({
     );
   };
 
+  const [collapsedCategories, setCollapsedCategories] = useState<
+    Record<string, boolean>
+  >({});
+
+  const toggleCategory = (category: string) => {
+    setCollapsedCategories((previous) => ({
+      ...previous,
+      [category]: !previous[category],
+    }));
+  };
+
   const renderExternalProjects = () => {
     const groupedProjects = externalProjects.reduce<
       Record<string, SanitizedExternalProject[]>
@@ -199,28 +210,50 @@ const ExternalProjectCard = ({
 
     const categories = getExternalProjectCategories(externalProjects);
 
-    return categories.map((category) => (
-      <details
-        key={category}
-        id={getCategoryId(category)}
-        className="research-category rounded-2xl border border-base-300 bg-base-100/60 p-4 shadow-sm"
-        open
-      >
-        <summary className="research-category-summary mb-4 flex cursor-pointer list-none items-center gap-3 rounded-xl px-1 py-1 transition-colors hover:bg-base-200/60">
-          <h4 className="text-base font-bold tracking-[0.12em] text-base-content uppercase">
-            {category}
-          </h4>
-          <span className="badge badge-primary badge-sm px-3">
-            {groupedProjects[category].length}
-          </span>
-        </summary>
-        <div className="research-category-grid grid grid-cols-1 gap-6 md:grid-cols-2">
-          {groupedProjects[category].map((item, index) =>
-            renderProjectCard(item, `${category}-${index}`),
-          )}
+    return categories.map((category) => {
+      const isCollapsed = !!collapsedCategories[category];
+
+      return (
+        <div
+          key={category}
+          id={getCategoryId(category)}
+          className={`research-category rounded-2xl border border-base-300 bg-base-100/60 p-4 shadow-sm ${
+            isCollapsed ? 'collapsed' : ''
+          }`}
+        >
+          <div
+            role="button"
+            tabIndex={0}
+            aria-expanded={!isCollapsed}
+            onClick={() => toggleCategory(category)}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                toggleCategory(category);
+              }
+            }}
+            className="research-category-summary mb-4 flex cursor-pointer items-center gap-3 rounded-xl px-1 py-1 transition-colors hover:bg-base-200/60"
+          >
+            <div className="flex flex-1 items-center gap-3">
+              <h4 className="text-base font-bold uppercase tracking-[0.12em] text-base-content">
+                {category}
+              </h4>
+              <span className="badge badge-primary badge-sm px-3">
+                {groupedProjects[category].length}
+              </span>
+            </div>
+            <div className="research-category-toggle flex h-8 w-8 items-center justify-center rounded-full bg-base-200 text-lg font-light text-primary transition-transform duration-300">
+              +
+            </div>
+          </div>
+          <div className="research-category-grid grid grid-cols-1 gap-6 overflow-hidden transition-all duration-300 ease-out md:grid-cols-2">
+            {groupedProjects[category].map((item, index) =>
+              renderProjectCard(item, `${category}-${index}`),
+            )}
+          </div>
         </div>
-      </details>
-    ));
+      );
+    });
   };
 
   return (
