@@ -1,6 +1,6 @@
 import React from 'react';
 import { SanitizedEducation } from '../../interfaces/sanitized-config';
-import { skeleton } from '../../utils';
+import { formatPeriod, skeleton } from '../../utils';
 
 const ListItem = ({
   time,
@@ -73,7 +73,7 @@ const EducationCard = ({
                 {educations.map((item, index) => (
                   <ListItem
                     key={index}
-                    time={`${item.from} - ${item.to}`}
+                    time={formatPeriod(item.from, item.to)}
                     degree={item.degree}
                     institution={item.institution}
                   />

@@ -38,7 +38,6 @@ const documentFiles = [
   'Schizophrenia Presentation 1.pdf',
   'Syringe Service Program 1.pdf',
   'citiCompletionCertificate_11836906_53441833 1.pdf',
-  'Hello from sunny - sunnysingh.hj07@gmail.com - Gmail.pdf',
   'harmanjit-kaur-resume.docx',
 ];
 
@@ -231,11 +230,6 @@ export const CONTENT_WORK: ContentWork[] = [
     'CITI Completion Certificate',
     'Certificate documenting completion of research ethics and compliance training.',
     'citiCompletionCertificate_11836906_53441833 1.pdf',
-  ),
-  documentWork(
-    'Professional Correspondence Sample',
-    'Professional correspondence sample demonstrating clear, thoughtful written communication.',
-    'Hello from sunny - sunnysingh.hj07@gmail.com - Gmail.pdf',
   ),
   documentWork(
     'Research and Clinical Resume',

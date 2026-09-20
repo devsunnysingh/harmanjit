@@ -16,6 +16,26 @@ const categoryOrder = [
   'Essays & Public Health',
 ];
 
+export const getExternalProjectCategories = (
+  externalProjects: SanitizedExternalProject[],
+): string[] => {
+  const categories = Array.from(
+    new Set(externalProjects.map((item) => item.category || 'Other Work')),
+  );
+
+  return categories.sort((first, second) => {
+    const firstIndex = categoryOrder.indexOf(first);
+    const secondIndex = categoryOrder.indexOf(second);
+    return (
+      (firstIndex === -1 ? categoryOrder.length : firstIndex) -
+      (secondIndex === -1 ? categoryOrder.length : secondIndex)
+    );
+  });
+};
+
+const getCategoryId = (category: string): string =>
+  `research-${category.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+
 const ExternalProjectCard = ({
   externalProjects,
   header,
@@ -177,37 +197,38 @@ const ExternalProjectCard = ({
       return groups;
     }, {});
 
-    const categories = Object.keys(groupedProjects).sort((first, second) => {
-      const firstIndex = categoryOrder.indexOf(first);
-      const secondIndex = categoryOrder.indexOf(second);
-      return (
-        (firstIndex === -1 ? categoryOrder.length : firstIndex) -
-        (secondIndex === -1 ? categoryOrder.length : secondIndex)
-      );
-    });
+    const categories = getExternalProjectCategories(externalProjects);
 
     return categories.map((category) => (
-      <section key={category}>
-        <div className="mb-4 flex items-center gap-3">
+      <details
+        key={category}
+        id={getCategoryId(category)}
+        className="research-category"
+        open
+      >
+        <summary className="research-category-summary mb-4 flex cursor-pointer list-none items-center gap-3">
           <h4 className="text-base font-semibold tracking-wide text-base-content">
             {category}
           </h4>
           <span className="badge badge-ghost">
             {groupedProjects[category].length}
           </span>
-        </div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        </summary>
+        <div className="research-category-grid grid grid-cols-1 gap-6 md:grid-cols-2">
           {groupedProjects[category].map((item, index) =>
             renderProjectCard(item, `${category}-${index}`),
           )}
         </div>
-      </section>
+      </details>
     ));
   };
 
   return (
     <Fragment>
-      <div className="col-span-1 lg:col-span-2">
+      <div
+        id="research-work"
+        className="col-span-1 lg:col-span-2 scroll-mt-4"
+      >
         <div className="card bg-base-200 shadow-xl border border-base-300">
           <div className="card-body p-8">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">

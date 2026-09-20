@@ -19,14 +19,17 @@ import { Profile } from '../interfaces/profile';
 import DetailsCard from './details-card';
 import SkillCard from './skill-card';
 import ExperienceCard from './experience-card';
+import LeadershipCard from './leadership-card';
 import EducationCard from './education-card';
 import CertificationCard from './certification-card';
 import { GithubProject } from '../interfaces/github-project';
 import GithubProjectCard from './github-project-card';
 import ExternalProjectCard from './external-project-card';
+import { getExternalProjectCategories } from './external-project-card';
 import BlogCard from './blog-card';
 import Footer from './footer';
 import PublicationCard from './publication-card';
+import ContentsCard from './contents-card';
 
 /**
  * Formats the GitHub rate limit reset time for display.
@@ -203,6 +206,39 @@ const GitProfileContent = ({
     }
   }, [theme]);
 
+  useEffect(() => {
+    const scrollStorageKey = 'gitprofile-scroll-position';
+    const previousScrollRestoration = window.history.scrollRestoration;
+
+    window.history.scrollRestoration = 'manual';
+
+    const saveScrollPosition = () => {
+      sessionStorage.setItem(scrollStorageKey, String(window.scrollY));
+    };
+
+    const restoreScrollPosition = () => {
+      const savedPosition = Number(sessionStorage.getItem(scrollStorageKey));
+
+      if (Number.isFinite(savedPosition) && savedPosition > 0) {
+        window.scrollTo({ top: savedPosition, behavior: 'auto' });
+      }
+    };
+
+    window.addEventListener('scroll', saveScrollPosition, { passive: true });
+    window.addEventListener('pageshow', restoreScrollPosition);
+
+    if (!loading) {
+      restoreScrollPosition();
+    }
+
+    return () => {
+      saveScrollPosition();
+      window.removeEventListener('scroll', saveScrollPosition);
+      window.removeEventListener('pageshow', restoreScrollPosition);
+      window.history.scrollRestoration = previousScrollRestoration;
+    };
+  }, [loading]);
+
   return (
     <div className="fade-in h-screen">
       {error ? (
@@ -230,23 +266,31 @@ const GitProfileContent = ({
                     loading={loading}
                     avatarRing={sanitizedConfig.themeConfig.displayAvatarRing}
                     resumeFileUrl={sanitizedConfig.resume.fileUrl}
+                    headline={sanitizedConfig.headline}
+                    contactEmail={sanitizedConfig.social.email}
                   />
                   <DetailsCard
                     profile={profile}
                     loading={loading}
-                    github={sanitizedConfig.github}
                     social={sanitizedConfig.social}
                   />
                   {sanitizedConfig.skills.length !== 0 && (
                     <SkillCard
                       loading={loading}
                       skills={sanitizedConfig.skills}
+                      skillGroups={sanitizedConfig.skillGroups}
                     />
                   )}
                   {sanitizedConfig.experiences.length !== 0 && (
                     <ExperienceCard
                       loading={loading}
                       experiences={sanitizedConfig.experiences}
+                    />
+                  )}
+                  {sanitizedConfig.leadership.length !== 0 && (
+                    <LeadershipCard
+                      loading={loading}
+                      leadership={sanitizedConfig.leadership}
                     />
                   )}
                   {sanitizedConfig.certifications.length !== 0 && (
@@ -265,6 +309,33 @@ const GitProfileContent = ({
               </div>
               <div className="lg:col-span-2 col-span-1">
                 <div className="grid grid-cols-1 gap-6">
+                  <ContentsCard
+                    items={[
+                      ...(sanitizedConfig.publications.length !== 0
+                        ? [{ label: 'Publications', target: '#publications' }]
+                        : []),
+                      ...(sanitizedConfig.projects.external.projects.length !==
+                      0
+                        ? [
+                            {
+                              label: 'Research & Technical Work',
+                              target: '#research-work',
+                            },
+                            ...getExternalProjectCategories(
+                              sanitizedConfig.projects.external.projects,
+                            ).map((category) => ({
+                              label: category,
+                              target: `#research-${category
+                                .toLowerCase()
+                                .replace(/[^a-z0-9]+/g, '-')}`,
+                            })),
+                          ]
+                        : []),
+                      ...(sanitizedConfig.blog.display
+                        ? [{ label: 'Articles', target: '#articles' }]
+                        : []),
+                    ]}
+                  />
                   {sanitizedConfig.projects.github.display && (
                     <GithubProjectCard
                       header={sanitizedConfig.projects.github.header}

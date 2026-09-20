@@ -8,6 +8,8 @@ interface AvatarCardProps {
   loading: boolean;
   avatarRing: boolean;
   resumeFileUrl?: string;
+  headline?: string;
+  contactEmail?: string;
 }
 
 /**
@@ -23,6 +25,8 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
   loading,
   avatarRing,
   resumeFileUrl,
+  headline,
+  contactEmail,
 }): React.JSX.Element => {
   return (
     <div className="card shadow-lg card-sm bg-base-100">
@@ -75,23 +79,40 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
               ? skeleton({ widthCls: 'w-48', heightCls: 'h-5' })
               : profile.bio}
           </div>
+          {headline && (
+            <p className="mt-4 text-sm font-semibold tracking-wide text-primary">
+              {headline}
+            </p>
+          )}
         </div>
-        {resumeFileUrl &&
-          (loading ? (
-            <div className="mt-6">
-              {skeleton({ widthCls: 'w-40', heightCls: 'h-8' })}
-            </div>
-          ) : (
-            <a
-              href={resumeFileUrl}
-              target="_blank"
-              className="btn btn-outline btn-sm text-xs mt-6 opacity-50"
-              download
-              rel="noreferrer"
-            >
-              Download Resume
-            </a>
-          ))}
+        {(resumeFileUrl || contactEmail) && (
+          <div className="mt-6 flex flex-wrap justify-center gap-2">
+            {resumeFileUrl &&
+              (loading ? (
+                <div>
+                  {skeleton({ widthCls: 'w-40', heightCls: 'h-8' })}
+                </div>
+              ) : (
+                <a
+                  href={resumeFileUrl}
+                  target="_blank"
+                  className="btn btn-outline btn-sm text-xs opacity-50"
+                  download
+                  rel="noreferrer"
+                >
+                  Download Resume
+                </a>
+              ))}
+            {contactEmail && !loading && (
+              <a
+                href={`mailto:${contactEmail}`}
+                className="btn btn-primary btn-sm text-xs"
+              >
+                Let's Connect
+              </a>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

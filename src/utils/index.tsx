@@ -7,6 +7,7 @@ import colors from '../data/colors.json';
 import {
   SanitizedConfig,
   SanitizedHotjar,
+  SanitizedSkillGroup,
   SanitizedThemeConfig,
 } from '../interfaces/sanitized-config';
 
@@ -15,6 +16,9 @@ export const isDarkishTheme = (appliedTheme: string): boolean => {
     appliedTheme,
   );
 };
+
+export const formatPeriod = (from: string, to: string): string =>
+  `${from}-${to}`;
 
 type EventParams = {
   [key: string]: string;
@@ -32,6 +36,7 @@ export const getSanitizedConfig = (
       github: {
         username: config.github.username,
       },
+      headline: config?.headline || '',
       projects: {
         github: {
           display: config?.projects?.github?.display ?? true,
@@ -87,6 +92,12 @@ export const getSanitizedConfig = (
         fileUrl: config?.resume?.fileUrl || '',
       },
       skills: config?.skills || [],
+      skillGroups: (config?.skillGroups || [])
+        .map((group): SanitizedSkillGroup => ({
+          title: group.title,
+          skills: group.skills,
+        }))
+        .filter((group) => group.title && group.skills.length !== 0),
       experiences:
         config?.experiences?.filter(
           (experience) =>
@@ -94,6 +105,17 @@ export const getSanitizedConfig = (
             experience.position ||
             experience.from ||
             experience.to,
+        ).map((experience) => ({
+          ...experience,
+          description: experience.description || '',
+        })) || [],
+      leadership:
+        config?.leadership?.filter(
+          (item) =>
+            item.organization ||
+            item.position ||
+            item.from ||
+            item.to,
         ) || [],
       certifications:
         config?.certifications?.filter(

@@ -77,6 +77,10 @@
 
 body {
   margin: 0;
+  background:
+    radial-gradient(circle at 8% 8%, color-mix(in srgb, var(--color-primary) 7%, transparent), transparent 24rem),
+    radial-gradient(circle at 92% 18%, color-mix(in srgb, var(--color-accent) 8%, transparent), transparent 22rem),
+    var(--color-base-200);
   font-family:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -91,6 +95,135 @@ code {
 
 svg {
   vertical-align: unset;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.card-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  letter-spacing: 0.01em;
+}
+
+#root {
+  position: relative;
+  isolation: isolate;
+}
+
+#root::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--color-base-content) 10%, transparent) 0.6px,
+    transparent 0.6px
+  );
+  background-size: 7px 7px;
+  content: '';
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.fade-in > div > div {
+  animation: portfolioStageIn 0.7s ease both;
+}
+
+.fade-in .card {
+  border: 1px solid color-mix(in srgb, var(--color-base-content) 10%, transparent);
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--color-neutral) 10%, transparent);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.fade-in .card:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 25%, transparent);
+  box-shadow: 0 18px 42px color-mix(in srgb, var(--color-neutral) 15%, transparent);
+}
+
+.fade-in .card.bg-base-200 {
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--color-primary) 4%, var(--color-base-200)), var(--color-base-200));
+}
+
+.fade-in .card-body > .mx-3 {
+  position: relative;
+  margin-bottom: 0.8rem;
+}
+
+.fade-in .card-body > .mx-3::after {
+  display: block;
+  width: 2.5rem;
+  height: 2px;
+  margin-top: 0.65rem;
+  background: var(--color-primary);
+  content: '';
+}
+
+.fade-in .badge-primary {
+  border: 0;
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--color-primary) 18%, transparent);
+  font-weight: 600;
+}
+
+.skill-group-grid {
+  min-width: 0;
+}
+
+.skill-badge {
+  display: flex;
+  width: 100%;
+  height: auto;
+  min-height: 2rem;
+  justify-content: flex-start;
+  padding: 0.4rem 0.7rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: left;
+  line-height: 1.25;
+}
+
+.skill-badge-list {
+  align-content: start;
+}
+
+@media (max-width: 639px) {
+  .skill-group-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fade-in .card:hover,
+  .fade-in .card a.card:hover {
+    transform: none;
+  }
+
+  .contents-card-link,
+  .research-category-grid {
+    animation: none;
+  }
+}
+
+.fade-in a {
+  transition: color 0.2s ease;
+}
+
+.fade-in .card a.card {
+  border-color: color-mix(in srgb, var(--color-base-content) 8%, transparent);
+}
+
+.fade-in .card a.card:hover {
+  transform: translateY(-3px);
+}
+
+@keyframes portfolioStageIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .z-hover {
@@ -116,6 +249,178 @@ svg {
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
   animation-duration: 1s;
+}
+
+.contents-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 28%, transparent);
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-primary) 9%, var(--color-base-100)),
+      var(--color-base-100) 48%
+    );
+  animation: contentsRise 0.55s ease both;
+}
+
+.contents-card::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--color-primary);
+  content: '';
+}
+
+.contents-card-body {
+  position: relative;
+}
+
+.contents-card-header {
+  position: relative;
+}
+
+.contents-card-header::after {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 30%;
+  height: 1px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--color-primary) 35%, transparent), transparent);
+  content: '';
+}
+
+.contents-card-icon {
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.contents-card:hover .contents-card-icon {
+  background-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
+  transform: rotate(-5deg) scale(1.06);
+}
+
+.contents-card-eyebrow {
+  color: var(--color-primary);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.contents-card-kicker {
+  margin-top: 0.125rem;
+  color: color-mix(in srgb, var(--color-base-content) 55%, transparent);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contents-card-link {
+  position: relative;
+  overflow: hidden;
+  animation: contentsLinkIn 0.4s ease both;
+  animation-delay: var(--contents-delay);
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.contents-card-link::before {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, color-mix(in srgb, var(--color-primary) 10%, transparent), transparent 80%);
+  content: '';
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 0.2s ease, transform 0.45s ease;
+}
+
+.contents-card-link > * {
+  position: relative;
+}
+
+.contents-card-featured {
+  border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-base-300));
+  background-color: color-mix(in srgb, var(--color-primary) 7%, transparent);
+  font-weight: 600;
+}
+
+.contents-card-link:hover,
+.contents-card-link:focus-visible {
+  border-color: var(--color-primary);
+  background-color: color-mix(in srgb, var(--color-primary) 8%, transparent);
+  color: var(--color-primary);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.contents-card-link:hover::before,
+.contents-card-link:focus-visible::before {
+  opacity: 1;
+  transform: translateX(100%);
+}
+
+.research-category-summary::after {
+  margin-left: auto;
+  color: var(--color-primary);
+  content: '+';
+  font-size: 1.25rem;
+  font-weight: 400;
+  transition: transform 0.2s ease;
+}
+
+.research-category[open] .research-category-summary::after {
+  transform: rotate(45deg);
+}
+
+.research-category-grid {
+  animation: categoryReveal 0.35s ease both;
+}
+
+@keyframes contentsRise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes contentsLinkIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes categoryReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contents-card,
+  .contents-card-link,
+  .research-category-grid,
+  .contents-card-link::before {
+    animation: none;
+    transition: none;
+  }
 }
 
 @keyframes fadeIn {

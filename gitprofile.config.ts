@@ -6,6 +6,7 @@ const CONFIG = {
   github: {
     username: 'harmanjitkaur', // Your GitHub org/user name. (This is the only required config)
   },
+  headline: 'PharmD | Clinical Research | Scientific Writing',
   /**
    * If you are deploying to https://<USERNAME>.github.io/, for example your repository is at https://github.com/harmanjitkaur/harmanjitkaur.github.io, set base to '/'.
    * If you are deploying to https://<USERNAME>.github.io/<REPO_NAME>/,
@@ -14,7 +15,7 @@ const CONFIG = {
   base: '/',
   projects: {
     github: {
-      display: true, // Display GitHub projects?
+      display: false, // Display GitHub projects?
       header: 'GitHub Projects',
       mode: 'automatic', // Mode can be: 'automatic' or 'manual'
       automatic: {
@@ -31,7 +32,7 @@ const CONFIG = {
       },
     },
     external: {
-      header: 'Research & Technical Work',
+      header: 'Selected Research & Technical Work',
       // To hide the `External Projects` section, keep it empty.
       projects: [
         ...CONTENT_WORK,
@@ -40,8 +41,6 @@ const CONFIG = {
           category: 'Featured Online Work',
           description:
             'Supported research documentation, literature review, source documentation, and scientific communication in regulated clinical and healthcare settings.',
-          imageUrl:
-            'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=900&q=80',
           link: 'https://1drv.ms/b/c/20df1b8d73d13a36/IQCUXAr80N7wSqjPikdG6CgLAfoclLc1FIqIcLEDxK59Urw',
         },
         {
@@ -49,8 +48,6 @@ const CONFIG = {
           category: 'Featured Online Work',
           description:
             'Executed 96-well dose-response assays, serial dilution workflows, and EC50 analysis in GraphPad Prism and Excel while translating technical findings for scientific stakeholders.',
-          imageUrl:
-            'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=900&q=80',
           link: 'https://www.coursera.org/account/accomplishments/specialization/9AMFBPH8IPHM?utm_source=email&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=s12n',
         },
         {
@@ -58,8 +55,6 @@ const CONFIG = {
           category: 'Featured Online Work',
           description:
             'Synthesized peer-reviewed evidence and organized supporting materials into clear, presentation-ready documentation for pharmaceutical and clinical research work.',
-          imageUrl:
-            'https://images.unsplash.com/photo-1456324504439-367cee3b3c32?auto=format&fit=crop&w=900&q=80',
           link: 'https://onedrive.live.com/?id=%2Fpersonal%2F20df1b8d73d13a36%2FDocuments%2FAttachments&listurl=%2Fpersonal%2F20df1b8d73d13a36%2FDocuments&redeem=aHR0cHM6Ly8xZHJ2Lm1zL2IvYy8yMGRmMWI4ZDczZDEzYTM2L0lRQ1VYQXI4ME43d1NxalBpa2RHNkNnTEFmb2NsTGMxRklxSWNMRUR4SzU5VXJ3&ga=1',
         },
       ],
@@ -69,7 +64,7 @@ const CONFIG = {
     title: 'Harmanjit Kaur | PharmD, MS Pharmaceutical Sciences',
     description:
       'PharmD and MS Pharmaceutical Sciences professional specializing in clinical research, drug development, scientific writing, and regulatory documentation.',
-    imageURL: '',
+    imageURL: '/logo.png',
   },
   social: {
     linkedin: 'harmanjit-kaur-pharmd-b93a34144',
@@ -112,7 +107,38 @@ const CONFIG = {
     'SOPs',
     'Healthcare Documentation',
     'Project Coordination',
-    'Problem Solving',
+  ],
+  skillGroups: [
+    {
+      title: 'Clinical Research',
+      skills: [
+        'Clinical Research',
+        'Drug Development',
+        'Clinical Trial Design',
+        'Literature Review',
+      ],
+    },
+    {
+      title: 'Scientific Communication',
+      skills: [
+        'Scientific Writing',
+        'Medical/Scientific Communication',
+        'Healthcare Documentation',
+      ],
+    },
+    {
+      title: 'Data & Analysis',
+      skills: ['Data Analysis', 'GraphPad Prism', 'Excel'],
+    },
+    {
+      title: 'Regulatory & Quality',
+      skills: [
+        'Regulatory Guidelines',
+        'Quality Assurance',
+        'Source Documentation',
+        'SOPs',
+      ],
+    },
   ],
   experiences: [
     {
@@ -122,6 +148,8 @@ const CONFIG = {
       to: '2025',
       companyLink:
         'https://www.linkedin.com/in/harmanjit-kaur-pharmd-b93a34144',
+      description:
+        'Supported inpatient clinical rotations and pharmaceutical sciences research through literature review, source documentation, and scientific analysis.',
     },
     {
       company: 'Retail, Hospital, and Centralized Pharmacy Settings',
@@ -129,6 +157,31 @@ const CONFIG = {
       from: '2007',
       to: '2022',
       companyLink: '',
+      description:
+        'Supported medication workflows across retail, hospital, and centralized pharmacy settings while coordinating patient-facing service and daily operations.',
+    },
+  ],
+  leadership: [
+    {
+      organization: 'APhA',
+      position: 'Member',
+      from: '2022',
+      to: 'Present',
+      organizationLink: 'https://aphanet.org/',
+    },
+    {
+      organization: 'Kappa Psi',
+      position: 'Chaplain',
+      from: '2023',
+      to: '2024',
+      organizationLink: 'https://www.kappapsi.org/',
+    },
+    {
+      organization: 'IPHO',
+      position: 'Vice President',
+      from: '2023',
+      to: '2024',
+      organizationLink: '',
     },
   ],
   certifications: [],

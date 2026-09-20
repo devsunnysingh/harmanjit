@@ -222,6 +222,20 @@ interface Experience {
   from: string;
   to: string;
   companyLink?: string;
+  description?: string;
+}
+
+interface SkillGroup {
+  title: string;
+  skills: Array<string>;
+}
+
+interface Leadership {
+  organization?: string;
+  position?: string;
+  from: string;
+  to: string;
+  organizationLink?: string;
 }
 
 interface Certification {
@@ -319,6 +333,11 @@ interface Config {
   github: Github;
 
   /**
+   * Professional headline shown below the profile name
+   */
+  headline?: string;
+
+  /**
    * Vite's base url
    */
   base?: string;
@@ -344,9 +363,19 @@ interface Config {
   skills?: Array<string>;
 
   /**
+   * Grouped professional skills
+   */
+  skillGroups?: Array<SkillGroup>;
+
+  /**
    * Experience list
    */
   experiences?: Array<Experience>;
+
+  /**
+   * Leadership positions and professional memberships
+   */
+  leadership?: Array<Leadership>;
 
   /**
    * Certifications list
