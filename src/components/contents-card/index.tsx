@@ -11,17 +11,21 @@ const ContentsCard = ({ items }: { items: ContentsItem[] }) => (
     className="contents-card card shadow-lg card-sm bg-base-100"
   >
     <div className="contents-card-body card-body p-6 sm:p-7">
-      <div className="contents-card-header flex items-center gap-3 mb-5">
-        <div className="contents-card-icon flex items-center justify-center w-10 h-10 rounded-xl bg-primary/10">
+      <div className="contents-card-header mb-5 flex items-center gap-3">
+        <div className="contents-card-icon flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 ring-1 ring-primary/20">
           <MdFormatListBulleted className="text-xl text-primary" />
         </div>
         <div>
-          <p className="contents-card-eyebrow">Explore the portfolio</p>
-          <h2 className="card-title text-base-content">Contents</h2>
-          <p className="contents-card-kicker">Jump to a section</p>
+          <p className="contents-card-eyebrow text-[10px] font-bold uppercase tracking-[0.2em] text-primary/80">
+            Explore the portfolio
+          </p>
+          <h2 className="card-title text-base-content text-lg">Contents</h2>
+          <p className="contents-card-kicker text-xs text-base-content/60">
+            Jump to a section
+          </p>
         </div>
       </div>
-      <div className="contents-card-links grid grid-cols-1 sm:grid-cols-3 gap-2">
+      <div className="contents-card-links grid grid-cols-1 gap-2 sm:grid-cols-3">
         {items.map((item, index) => (
           <a
             key={item.target}
@@ -31,7 +35,7 @@ const ContentsCard = ({ items }: { items: ContentsItem[] }) => (
             }`}
             style={{ '--contents-delay': `${index * 55}ms` } as React.CSSProperties}
           >
-            <span>{item.label}</span>
+            <span className="font-medium">{item.label}</span>
             <MdArrowForward className="shrink-0 transition-transform group-hover:translate-x-1" />
           </a>
         ))}

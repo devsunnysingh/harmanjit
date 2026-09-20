@@ -6,7 +6,8 @@ const CONFIG = {
   github: {
     username: 'harmanjitkaur', // Your GitHub org/user name. (This is the only required config)
   },
-  headline: 'PharmD | Clinical Research | Scientific Writing',
+  headline:
+    'PharmD | Clinical Research | Regulatory Documentation | Scientific Writing',
   /**
    * If you are deploying to https://<USERNAME>.github.io/, for example your repository is at https://github.com/harmanjitkaur/harmanjitkaur.github.io, set base to '/'.
    * If you are deploying to https://<USERNAME>.github.io/<REPO_NAME>/,
@@ -61,9 +62,10 @@ const CONFIG = {
     },
   },
   seo: {
-    title: 'Harmanjit Kaur | PharmD, MS Pharmaceutical Sciences',
+    title:
+      'Harmanjit Kaur | PharmD | Clinical Research | Regulatory Affairs | Scientific Writing',
     description:
-      'PharmD and MS Pharmaceutical Sciences professional specializing in clinical research, drug development, scientific writing, and regulatory documentation.',
+      'PharmD and MS Pharmaceutical Sciences professional with experience in clinical research, regulatory documentation, scientific writing, literature review, and healthcare operations.',
     imageURL: '/logo.png',
   },
   social: {
@@ -93,17 +95,20 @@ const CONFIG = {
   },
   skills: [
     'Clinical Research',
-    'Drug Development',
-    'Regulatory Guidelines',
+    'Regulatory Affairs',
+    'Regulatory Documentation',
     'Scientific Writing',
-    'Medical/Scientific Communication',
+    'Clinical Trial Documentation',
+    'Good Clinical Practice (GCP)',
+    'ICH-GCP',
+    'Protocol Review',
+    'Source Documentation',
     'Literature Review',
-    'Clinical Trial Design',
+    'Drug Development',
     'Data Analysis',
     'GraphPad Prism',
     'Excel',
     'Quality Assurance',
-    'Source Documentation',
     'SOPs',
     'Healthcare Documentation',
     'Project Coordination',
@@ -113,8 +118,8 @@ const CONFIG = {
       title: 'Clinical Research',
       skills: [
         'Clinical Research',
-        'Drug Development',
-        'Clinical Trial Design',
+        'Clinical Trial Documentation',
+        'Protocol Review',
         'Literature Review',
       ],
     },
@@ -122,21 +127,21 @@ const CONFIG = {
       title: 'Scientific Communication',
       skills: [
         'Scientific Writing',
-        'Medical/Scientific Communication',
+        'Regulatory Documentation',
         'Healthcare Documentation',
       ],
     },
     {
       title: 'Data & Analysis',
-      skills: ['Data Analysis', 'GraphPad Prism', 'Excel'],
+      skills: ['Data Analysis', 'GraphPad Prism', 'Excel', 'Good Clinical Practice (GCP)'],
     },
     {
       title: 'Regulatory & Quality',
       skills: [
-        'Regulatory Guidelines',
+        'Regulatory Affairs',
+        'ICH-GCP',
         'Quality Assurance',
         'Source Documentation',
-        'SOPs',
       ],
     },
   ],

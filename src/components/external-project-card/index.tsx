@@ -110,7 +110,7 @@ const ExternalProjectCard = ({
 
     return (
       <a
-        className="card shadow-md card-sm bg-base-100 cursor-pointer overflow-hidden transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl"
+        className="card card-sm cursor-pointer overflow-hidden border border-base-300 bg-base-100 shadow-md transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl"
         key={key}
         href={projectUrl}
         onClick={(e) => {
@@ -203,14 +203,14 @@ const ExternalProjectCard = ({
       <details
         key={category}
         id={getCategoryId(category)}
-        className="research-category"
+        className="research-category rounded-2xl border border-base-300 bg-base-100/60 p-4 shadow-sm"
         open
       >
-        <summary className="research-category-summary mb-4 flex cursor-pointer list-none items-center gap-3">
-          <h4 className="text-base font-semibold tracking-wide text-base-content">
+        <summary className="research-category-summary mb-4 flex cursor-pointer list-none items-center gap-3 rounded-xl px-1 py-1 transition-colors hover:bg-base-200/60">
+          <h4 className="text-base font-bold tracking-[0.12em] text-base-content uppercase">
             {category}
           </h4>
-          <span className="badge badge-ghost">
+          <span className="badge badge-primary badge-sm px-3">
             {groupedProjects[category].length}
           </span>
         </summary>
@@ -229,9 +229,9 @@ const ExternalProjectCard = ({
         id="research-work"
         className="col-span-1 lg:col-span-2 scroll-mt-4"
       >
-        <div className="card bg-base-200 shadow-xl border border-base-300">
+        <div className="card border border-base-300 bg-base-200 shadow-xl">
           <div className="card-body p-8">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+            <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-center space-x-3">
                 {loading ? (
                   skeleton({
@@ -240,17 +240,17 @@ const ExternalProjectCard = ({
                     className: 'rounded-xl',
                   })
                 ) : (
-                  <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-xl">
-                    <MdOpenInNew className="text-2xl" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 ring-1 ring-primary/20">
+                    <MdOpenInNew className="text-2xl text-primary" />
                   </div>
                 )}
                 <div className="min-w-0 flex-1">
-                  <h3 className="text-base sm:text-lg font-bold text-base-content truncate">
+                  <h3 className="truncate text-base font-black uppercase tracking-[0.18em] text-base-content sm:text-lg">
                     {loading
                       ? skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
                       : header}
                   </h3>
-                  <div className="text-base-content/60 text-xs sm:text-sm mt-1 truncate">
+                  <div className="mt-1 truncate text-xs text-base-content/60 sm:text-sm">
                     {loading
                       ? skeleton({ widthCls: 'w-32', heightCls: 'h-4' })
                       : `Showcasing ${externalProjects.length} projects`}
@@ -258,7 +258,7 @@ const ExternalProjectCard = ({
                 </div>
               </div>
             </div>
-            <div className="space-y-10">
+            <div className="space-y-6">
               {loading ? renderSkeleton() : renderExternalProjects()}
             </div>
           </div>

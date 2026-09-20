@@ -250,7 +250,7 @@ const GitProfileContent = ({
       ) : (
         <>
           <div className={`p-4 lg:p-10 min-h-full ${BG_COLOR}`}>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 rounded-box">
+            <div className="grid grid-cols-1 gap-7 rounded-box lg:grid-cols-3">
               <div className="col-span-1">
                 <div className="grid grid-cols-1 gap-6">
                   {!sanitizedConfig.themeConfig.disableSwitch && (
